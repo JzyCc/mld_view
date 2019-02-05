@@ -20,25 +20,46 @@ public class DragProgressView extends View {
 
     private Paint paint;
 
-
+    /*当前进度*/
     private float loadProgress;
+
+    /*加载后进度条的颜色*/
     private int loadedColor = 0xFF1E90FF;
+
+    /*当前进度位置点的颜色*/
     private int spotColor = 0xFFFFFFFF;
+
+    /*进度度默认颜色*/
     private int defaultColor = 0xFFCCCCCC;
+
+    /*进度条高度 px*/
     private float lineHeight = 20;
+
+    /*圆点半径*/
     private float spotRadius = 50;
+
+    /*进度条左右边距*/
     private float paddingLeft = 60;
+
+    /*背景色*/
     private int backgroundaColor = 0x80000000;
 
+    /*进度条 X 圆角*/
     private float lineRadiusX = 10;
+
+    /*进度条 Y 圆角*/
     private float lineRadiusY = 10;
 
+    /*存储当前进度位置的点*/
     private PointF touchPoint = new PointF();
 
+    /*当前是否可以拖动进度条，用于开启拖拽功能时*/
     private boolean canDrag = false;
 
+    /*是否开启拖拽功能*/
     private boolean dragEnabled = true;
 
+    /*用于监听当前进度条的位置*/
     public static interface OnProgressListener{
         void onCurrentProgress(float value);
     }
