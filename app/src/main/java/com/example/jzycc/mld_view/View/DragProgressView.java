@@ -2,12 +2,10 @@ package com.example.jzycc.mld_view.View;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -62,6 +60,8 @@ public class DragProgressView extends View {
     /*用于监听当前进度条的位置*/
     public static interface OnProgressListener{
         void onCurrentProgress(float value);
+
+        void onError();
     }
 
     private List<OnProgressListener> onProgressListeners = new ArrayList<>();
@@ -174,6 +174,22 @@ public class DragProgressView extends View {
 
     public void setLoadProgress(float loadProgress){
         this.loadProgress = loadProgress;
+        transformProgress(loadProgress);
+    }
+
+    private void transformProgress(final float loadProgress){
+        if(loadProgress == 0f){
+            checkTouchRange(getLineStartX(), getSpotY());
+        }else if (loadProgress == 100f){
+            checkTouchRange(getLineStopX(), getSpotY());
+        }else {
+            post(new Runnable() {
+                @Override
+                public void run() {
+                    checkTouchRange(loadProgress*(getMeasuredWidth() - paddingLeft - spotRadius)/100, getSpotY());
+                }
+            });
+        }
     }
 
     private float getLoadInt(){
@@ -185,10 +201,13 @@ public class DragProgressView extends View {
         }
         return (touchPoint.x - paddingLeft - spotRadius)*100/(getMeasuredWidth() - 2*paddingLeft - 2*spotRadius);
     }
+
     private float checkTouchRange(float x, float y) {
         if(x >= getLineStartX() && x <= getLineStopX()
                 && y >= (getSpotY() - spotRadius) && y <= (getSpotY() + spotRadius)){
             touchPoint.x = x;
+
+            invalidate();
 
             for (OnProgressListener onProgressListener : onProgressListeners){
                 onProgressListener.onCurrentProgress(getLoadInt());
@@ -196,6 +215,11 @@ public class DragProgressView extends View {
 
             return x;
         }
+
+        for (OnProgressListener onProgressListener : onProgressListeners){
+            onProgressListener.onError();
+        }
+
         return -1f;
     }
 
@@ -209,16 +233,14 @@ public class DragProgressView extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 performClick();
-                if (checkTouchRange(event.getX(), event.getY()) > 0 && dragEnabled) {
+                if (dragEnabled && checkTouchRange(event.getX(), event.getY()) > 0) {
                     canDrag = true;
-                    invalidate();
                     return true;
                 }else {
                     return false;
                 }
             case MotionEvent.ACTION_MOVE:
-                if (checkTouchRange(event.getX(), event.getY()) > 0 && dragEnabled && canDrag) {
-                    invalidate();
+                if (dragEnabled && canDrag && checkTouchRange(event.getX(), event.getY()) > 0) {
                     return true;
                 } else {
                     canDrag = false;

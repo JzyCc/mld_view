@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="vertical">
 
+    <com.example.jzycc.mld_view.View.FlowLabelLayout
+        android:id="@+id/fbl_tag"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"></com.example.jzycc.mld_view.View.FlowLabelLayout>
     <com.example.jzycc.mld_view.View.DragProgressView
         android:id="@+id/dpv_progess"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

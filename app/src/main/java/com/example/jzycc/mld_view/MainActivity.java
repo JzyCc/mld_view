@@ -5,9 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.jzycc.mld_view.View.DragProgressView;
+import com.example.jzycc.mld_view.View.FlowLabelLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private DragProgressView dragProgressView;
+    private FlowLabelLayout flowLabelLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,11 +20,27 @@ public class MainActivity extends AppCompatActivity {
 
         dragProgressView = findViewById(R.id.dpv_progess);
 
+        flowLabelLayout = findViewById(R.id.fbl_tag);
+
         dragProgressView.addProgressListener(new DragProgressView.OnProgressListener() {
             @Override
             public void onCurrentProgress(float value) {
-                Log.i("jzy111", "onCurrentProgress: " + value);
+
+            }
+
+            @Override
+            public void onError() {
+
             }
         });
+
+        List<FlowLabelLayout.Label> list = new ArrayList<>();
+        FlowLabelLayout.Label label = new FlowLabelLayout.Label();
+        label.setText("!23");
+        FlowLabelLayout.Label label1 = new FlowLabelLayout.Label();
+        label1.setText("!234");
+        list.add(label);
+        list.add(label1);
+        flowLabelLayout.setFlowLabelLayout(list,null);
     }
 }
