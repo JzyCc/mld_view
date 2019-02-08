@@ -15,5 +15,10 @@
         android:id="@+id/dpv_progess"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="666"
+        android:textSize="14sp"/>
 
 </LinearLayout>

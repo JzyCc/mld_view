@@ -6,13 +6,13 @@ import android.util.TypedValue;
 public class PixelCalculationUtils {
 
     public static int dp2px(Context context, float dp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
-                context.getResources().getDisplayMetrics());
+        final float scale = context.getResources ().getDisplayMetrics ().density;
+        return (int) (dp * scale + 0.5f);
     }
 
     public static int sp2px(Context context, float sp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp,
-                context.getResources().getDisplayMetrics());
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (sp * fontScale + 0.5f);
     }
 
 

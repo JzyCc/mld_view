@@ -41,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
         label1.setText("!234");
         list.add(label);
         list.add(label1);
-        flowLabelLayout.setFlowLabelLayout(list,null);
+
+        List<String> labels = new ArrayList<>();
+        labels.add("12111111123214");
+        labels.add("12111111123214knklsf4");
+        labels.add("12111111123gsdg2214");
+        labels.add("12111111123214");
+        labels.add("12111111123214knklsf4");
+        labels.add("12111111123gsdg2214");
+        flowLabelLayout.setFlowLabelLayout(labels,label,null);
     }
 }

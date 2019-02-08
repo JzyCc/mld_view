@@ -73,6 +73,7 @@ public class FlowLabelLayout extends ViewGroup {
     }
 
     public void setFlowLabelLayout(List<String> labels, Label label,final OnLabelClickListener onLabelClickListner){
+        this.labels.clear();
         int i = 0;
         for(String txt : labels){
             TextView textView = new TextView(getContext());
@@ -82,11 +83,13 @@ public class FlowLabelLayout extends ViewGroup {
             textView.setGravity(Gravity.CENTER);
             textView.setText(txt);
             textView.setTextColor(label.getTextColor());
-            textView.setTextSize(PixelCalculationUtils.sp2px(getContext(), label.getTextSize()));
+            textView.setTextSize(label.getTextSize());
+
             textView.setPadding(PixelCalculationUtils.dp2px(getContext(), label.getPaddingStart()),
                     PixelCalculationUtils.dp2px(getContext(), label.getPaddingTop()),
                     PixelCalculationUtils.dp2px(getContext(), label.getPaddingEnd()),
                     PixelCalculationUtils.dp2px(getContext(), label.getPaddingBottom()));
+
             if(label.getBackgroundDrawable() != null){
                 textView.setBackgroundResource(label.getBackgroundDrawable());
             }
@@ -137,12 +140,12 @@ public class FlowLabelLayout extends ViewGroup {
 
             if ((lineSize += child.getMeasuredWidth()) <= maxLineWidth) {
                 lineSize += horizontalSpacing;
-                nowLine.addChild(labels.get(i), child.getMeasuredHeight());
             } else {
                 lineSize = 0;
                 lines.add(nowLine);
                 nowLine = new Line();
             }
+            nowLine.addChild(labels.get(i), child.getMeasuredHeight());
         }
 
         if (!lines.contains(nowLine)) {
@@ -208,7 +211,7 @@ public class FlowLabelLayout extends ViewGroup {
         private int position;
         private String text;
         private int textColor = Color.BLACK;
-        private int textSize = 14;
+        private int textSize = 12;
         private Integer backgroundDrawable;
         private int paddingHorizontal;
         private int paddingVertical;
