@@ -44,11 +44,18 @@ public class MainActivity extends AppCompatActivity {
 
         List<String> labels = new ArrayList<>();
         labels.add("12111111123214");
-        labels.add("12111111123214knklsf4");
+        labels.add("12111111123214knklsf444444444");
         labels.add("12111111123gsdg2214");
         labels.add("12111111123214");
         labels.add("12111111123214knklsf4");
-        labels.add("12111111123gsdg2214");
+        labels.add("12111111123gsdg221");
         flowLabelLayout.setFlowLabelLayout(labels,label,null);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i("jzy111", "onResume: "+ flowLabelLayout.getMeasuredHeight());
+
     }
 }

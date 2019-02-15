@@ -1,7 +1,6 @@
 package com.example.jzycc.mld_view.utils;
 
 import android.content.Context;
-import android.util.TypedValue;
 
 public class PixelCalculationUtils {
 

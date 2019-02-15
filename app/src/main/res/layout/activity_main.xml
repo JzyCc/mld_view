@@ -10,7 +10,8 @@
     <com.example.jzycc.mld_view.View.FlowLabelLayout
         android:id="@+id/fbl_tag"
         android:layout_width="match_parent"
-        android:layout_height="300dp"></com.example.jzycc.mld_view.View.FlowLabelLayout>
+        android:layout_height="300dp"
+        android:paddingRight="10dp"></com.example.jzycc.mld_view.View.FlowLabelLayout>
     <com.example.jzycc.mld_view.View.DragProgressView
         android:id="@+id/dpv_progess"
         android:layout_width="match_parent"

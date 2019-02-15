@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -123,7 +124,7 @@ public class FlowLabelLayout extends ViewGroup {
         int maxLineHeight = MeasureSpec.getSize(heightMeasureSpec) - getPaddingTop() - getPaddingBottom();
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-
+        Log.i("jzy111", "onMeasure: "+"!@2");
         lines.clear();
         lineSize = 0;
         @SuppressLint("DrawAllocation") Line nowLine = new Line();
@@ -138,14 +139,18 @@ public class FlowLabelLayout extends ViewGroup {
 
             child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
 
-            if ((lineSize += child.getMeasuredWidth()) <= maxLineWidth) {
+            if ((lineSize + child.getMeasuredWidth()) <= maxLineWidth) {
                 lineSize += horizontalSpacing;
+                Log.i("jzy111", "onMeasure: "+ lineSize +"," + maxLineWidth);
             } else {
                 lineSize = 0;
                 lines.add(nowLine);
                 nowLine = new Line();
+                Log.i("jzy111", "onMeasure: "+ lineSize +"," + maxLineWidth);
             }
+
             nowLine.addChild(labels.get(i), child.getMeasuredHeight());
+            lineSize += child.getMeasuredWidth();
         }
 
         if (!lines.contains(nowLine)) {
@@ -169,6 +174,7 @@ public class FlowLabelLayout extends ViewGroup {
         int left = getPaddingLeft();
         int top = getPaddingTop();
         for (Line line : lines) {
+            Log.i("jzy111", "onLayout: "+ line.getChilds().size());
             line.layout(left, top);
             top = top+line.getHeight() + verticalSpacing;
         }
