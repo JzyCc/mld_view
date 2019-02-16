@@ -124,7 +124,6 @@ public class FlowLabelLayout extends ViewGroup {
         int maxLineHeight = MeasureSpec.getSize(heightMeasureSpec) - getPaddingTop() - getPaddingBottom();
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        Log.i("jzy111", "onMeasure: "+"!@2");
         lines.clear();
         lineSize = 0;
         @SuppressLint("DrawAllocation") Line nowLine = new Line();
@@ -141,12 +140,10 @@ public class FlowLabelLayout extends ViewGroup {
 
             if ((lineSize + child.getMeasuredWidth()) <= maxLineWidth) {
                 lineSize += horizontalSpacing;
-                Log.i("jzy111", "onMeasure: "+ lineSize +"," + maxLineWidth);
             } else {
                 lineSize = 0;
                 lines.add(nowLine);
                 nowLine = new Line();
-                Log.i("jzy111", "onMeasure: "+ lineSize +"," + maxLineWidth);
             }
 
             nowLine.addChild(labels.get(i), child.getMeasuredHeight());
